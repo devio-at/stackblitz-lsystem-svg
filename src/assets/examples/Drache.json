@@ -1,0 +1,1 @@
+{"startDegree":0,"backColor":"white","symbols":[{"symbol":"x","type":0,"derivation":"+y--x+"},{"symbol":"y","type":0,"derivation":"-y++x-"},{"symbol":"+","type":1,"degrees":45,"direction":0},{"symbol":"-","type":1,"degrees":45,"direction":1}],"name":"Drache","startSymbol":"x"}

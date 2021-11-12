@@ -1,0 +1,27 @@
+<form>
+	<div class="border rounded pb-2 pt-2">
+
+		<app-line-symbol-editor *ngIf="symbol.type===symbolType.Line" [symbol]="symbol"
+			(modelChanged)="onModelChanged()">
+		</app-line-symbol-editor>
+		<app-angle-symbol-editor *ngIf="symbol.type===symbolType.Angle" [symbol]="symbol"
+			(modelChanged)="onModelChanged()">
+		</app-angle-symbol-editor>
+		<app-stack-symbol-editor *ngIf="symbol.type===symbolType.Stack" [symbol]="symbol"
+			(modelChanged)="onModelChanged()">
+		</app-stack-symbol-editor>
+		<app-string-symbol-editor *ngIf="symbol.type===symbolType.String" [symbol]="symbol"
+			(modelChanged)="onModelChanged()"></app-string-symbol-editor>
+	</div>
+	<div class="border rounded pb-2 pt-2">
+		<div class="form-group">
+			<div class="row">
+				<label class="col-sm-6" for="type">Derivation</label>
+				<div class="col-sm-6">
+					<input class="form-control" [(ngModel)]="symbol.derivation" (change)="onModelChanged()"
+                        name="derivation" />
+                </div>
+				</div>
+			</div>
+		</div>
+</form>

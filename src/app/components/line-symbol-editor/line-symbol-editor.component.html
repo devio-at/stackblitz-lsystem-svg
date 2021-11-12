@@ -1,0 +1,28 @@
+<div class="form-group">
+    <div class="row">
+        <label class="col-sm-6" for="width">Width</label>
+        <div class="col-sm-6">
+            <input class="form-control" [(ngModel)]="symbol.width" (change)="onModelChanged()" />
+
+        </div>
+    </div>
+    <div class="row">
+        <label for="type" class="col-sm-6">Color</label>
+        <div class="col-sm-6">
+            <input class="form-control" [(colorPicker)]="symbol.color" [style.background]="symbol.color"
+                [(ngModel)]="symbol.color" class="form-control" (colorPickerChange)="onModelChanged()" />
+
+        </div>
+    </div>
+    <div class="row">
+        <label for="type" class="col-sm-6">Line Ends</label>
+        <div class="col-sm-6">
+            <select class="form-control" [(ngModel)]="symbol.lineCap" (change)="onModelChanged()">
+                <option >Default</option>
+                <option value="butt">butt</option>
+                <option value="square">square</option>
+                <option value="round">round</option>
+            </select>
+        </div>
+    </div>
+</div>

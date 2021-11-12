@@ -1,0 +1,33 @@
+<div class="form-group">
+    <div class="row">
+        <label for="operation" class="col-sm-6">Operation</label>
+        <div class="col-sm-6">
+            <select class="form-control" [(ngModel)]="symbol.operation" (change)="onModelChanged()">
+                <option disabled>Select Symbol</option>
+                <option value="{{stackOperation.Push}}">Push</option>
+                <option value="{{stackOperation.Pop}}">Pop</option>
+            </select>
+        </div>
+    </div>
+    <div class="row" *ngIf="symbol.operation == stackOperation.Push">
+        <div class="col-sm-6"></div>
+        <div class="col-sm-6">
+            <label for="pushPosition">
+                <input type="checkbox" id="pushPosition" [(ngModel)]="symbol.pushPosition"
+                    (change)="onModelChanged()" />
+                Position</label>
+        </div>
+        <div class="col-sm-6"></div>
+        <div class="col-sm-6"> <label for="pushDirection">
+                <input type="checkbox" id="pushDirection" [(ngModel)]="symbol.pushDirection"
+                    (change)="onModelChanged()" />
+                Direction</label>
+        </div>
+        <div class="col-sm-6"></div>
+        <div class="col-sm-6"> <label for="pushPen">
+                <input type="checkbox" id="pushPen" [(ngModel)]="symbol.pushPen" (change)="onModelChanged()" />
+                Pen</label>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+<div class="form-group">
+    <div class="row">
+        <label class="col-sm-6" for="degrees">Degrees</label>
+        <div class="col-sm-6">
+            <input type="number" class="form-control" [(ngModel)]="symbol.degrees" (change)="onModelChanged()" />
+        </div>
+    </div>
+    <div class="row">
+        <label class="col-sm-6" for="direction">Direction</label>
+        <div class="col-sm-6">
+            <select class=" form-control" [(ngModel)]="symbol.direction" (change)="onModelChanged()">
+                <option disabled>Select Symbol</option>
+                <option value="{{directionType.Left}}">Left</option>
+                <option value="{{directionType.Right}}">Right</option>
+            </select>
+        </div>
+    </div>
+</div>

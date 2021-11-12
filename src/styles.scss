@@ -1,0 +1,109 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+/* @import '~bootstrap/scss/bootstrap'; */
+
+@import '~@angular/material/prebuilt-themes/purple-green.css';
+
+@import '~bootstrap/scss/bootstrap-grid'; // add the grid
+
+/*/ Imports functions, variables, and mixins that are needed by other Bootstrap files
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+// Import Reboot
+@import '~bootstrap/scss/reboot';
+@import '~bootstrap/scss/grid'; // add the grid
+@import '~bootstrap/scss/utilities'; // add css utilities*/
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+div.content,
+mat-tab-group,
+.mat-tab-body-wrapper {
+  height: 100%;
+}
+
+.mat-tab-body-wrapper {
+  flex-grow: 1;
+}
+
+div.toolbar {
+  display: flex;
+  align-items: center;
+}
+
+.mat-tab-labels {
+  .mat-tab-label {
+    /*height: 1.5em;
+        padding: 0 6px;*/
+    min-width: 6em;
+    padding-left: 2em;
+    padding-right: 2em;
+  }
+}
+
+div.row {
+  margin: 0;
+
+  input.form-control,
+  select.form-control {
+    width: 100%;
+  }
+
+  button.mat-button {
+    padding: 0;
+    line-height: 32px;
+    min-width: initial;
+  }
+}
+
+div.row.form-row {
+  margin-left: -15px;
+  margin-right: -15px;
+}
+
+div.color-picker {
+  position: static;
+}
+
+footer {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  line-height: 20px;
+}
+
+footer a {
+  display: flex;
+  align-items: center;
+}
+
+/* fallback 
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(/assets/materialicons-v55.woff2) format('woff2');
+}*/
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -moz-font-feature-settings: 'liga';
+  -moz-osx-font-smoothing: grayscale;
+}

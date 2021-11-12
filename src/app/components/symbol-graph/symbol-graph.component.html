@@ -1,0 +1,30 @@
+<div class="spacer">&nbsp;</div>
+<div class="row m-0" style="height: calc(100vh - 100px)">
+	<div class="col-sm-10">
+		<!--
+        <svg height="100%" width="100%" [attr.viewBox]="viewBox"  style="border: solid 1px grey" [innerHtml]="symbolSvg">
+
+        </svg>
+        -->
+		<app-svg [viewBox]="viewBox" [svgContent]="symbolSvg"></app-svg>
+	</div>
+	<div class="col-sm-2">
+		<div class="row">
+			<div class="col-sm-6">Level</div>
+			<div class="col-sm-6">
+				<select [(ngModel)]="level" (ngModelChange)="onLevelChanged()" class="form-control" name="level">
+
+                    <option *ngFor="let i of [0,1,2,3,4,5,6,7,8,9,10]" [ngValue]="i" [selected]="level==i">{{i}}
+                    </option>
+
+                </select>
+			</div>
+		</div>
+		<div class="row">
+			displaying {{symbolCount}} symbols
+		</div>
+		<div class="row" style="font-family: monospace; word-break: break-all; overflow-y: scroll;height: 70vh;">
+			{{symbolString}}
+		</div>
+	</div>
+</div>

@@ -1,0 +1,114 @@
+<mat-tab-group *ngIf="viewModel">
+    <mat-tab label="Symbols">
+        <div class="spacer">&nbsp;</div>
+        <form class="form-horizontal">
+            <div class="form-group ">
+                <div class="row">
+                    <label class="col-sm-3 control-label" for="currentSymbol">Symbols</label>
+                    <div class="col-sm-6">
+                        <select [(ngModel)]="currentSymbol" class=" form-control" name="currentSymbol">
+
+                            <option disabled>Select Symbol</option>
+
+                            <option *ngFor="let symbol of viewModel.symbols" [ngValue]="symbol"
+                                [selected]="currentSymbol && (currentSymbol.symbol==symbol.symbol)">
+                                {{symbol.displayName}}</option>
+
+                        </select>
+                    </div>
+                    <div class="col-sm-3"> <button mat-button type="button" class="btn btn-secondary"
+                            [disabled]="!currentSymbol" (click)="btnDeleteSymbol()">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div *ngIf="currentSymbol">
+            <app-symbol-editor [symbol]="currentSymbol" (modelChanged)="onModelChanged()"></app-symbol-editor>
+        </div>
+
+        <hr />
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-sm-6">
+                    <select [(ngModel)]="type" class="form-control" name="type">
+
+                        <option disabled>Select Type</option>
+
+                        <option *ngFor="let v of types" [value]="v">{{v}}</option>
+
+                    </select>
+                </div>
+                <div class="col-sm-3">
+                    <input [(ngModel)]="newSymbol" (ngModelChange)="calcIsValidNewSymbol(newSymbol)" type="text"
+                        maxlength="1" class="form-control" name="newSymbol">
+                </div>
+                <div class="col-sm-3">
+                    <button mat-button type="button" class="btn btn-secondary" [disabled]="!type || !isValidNewSymbol"
+                        (click)="createNewSymbol()">New</button>
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+    <mat-tab label="Grammar">
+        <ng-template mat-tab-label>
+            Grammar
+            <mat-icon *ngIf="!viewModel.startSymbol" class="mat-warn">warning</mat-icon>
+
+        </ng-template>
+        <form>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <mat-form-field class="">
+                            <mat-label>Name</mat-label>
+                            <input matInput [(ngModel)]="viewModel.name" name="name" (ngModelChange)="onModelChanged()">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-sm-6" for="startSymbol">Start Symbol</label>
+                    <div class="col-sm-6">
+                        <select [(ngModel)]="viewModel.startSymbol" (ngModelChange)="onModelChanged()"
+                            class="form-control" name="startSymbol">
+
+                            <option disabled>Select Symbol</option>
+
+                            <option *ngFor="let symbol of viewModel.symbols" [ngValue]="symbol.symbol"
+                                [selected]="viewModel.startSymbol==symbol.symbol">{{symbol.displayName}}</option>
+
+                        </select>
+                    </div>
+                </div>
+                <div class="spacer">&nbsp;</div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <button mat-flat-button color="primary" type="button" class="btn btn-secondary"
+                            [disabled]="!viewModel.symbols.length" (click)="btnCopy()">Copy</button>
+                    </div>
+                    <div class="col-sm-6">
+                        <button mat-flat-button color="primary" type="button" class="btn btn-secondary"
+                            [disabled]="!viewModel.symbols.length" (click)="btnDownload()">Download</button>
+                    </div>
+                </div>
+                <div class="spacer">&nbsp;</div>
+                <div class="row">
+                    <div class="col-sm-6"></div>
+                    <div class="col-sm-6">
+                        <button mat-flat-button color="warn" type="button" class="btn btn-secondary"
+                            (click)="btnDeleteGrammar()">Delete Grammar</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <br />
+        <div class="form-group pb-2">
+            <div class="row">
+                <div class="col-sm-12" style="white-space: pre-wrap; font-family: monospace;">{{grammarDescription}}
+                </div>
+
+            </div>
+        </div>
+    </mat-tab>
+</mat-tab-group>

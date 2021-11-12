@@ -1,0 +1,153 @@
+<style>
+  div.links a {
+    color: white;
+    border-bottom: solid 1px #9400ff;
+    text-decoration: none;
+  }
+
+  .my-drop-zone {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    /*solid 1px #9400ff;*/
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+  }
+
+  .nv-file-over {
+    border: solid 1px #9400ff;
+  }
+
+  .custom-file-input {
+    color: transparent;
+  }
+</style>
+<div class="content" role="main">
+  <mat-tab-group [(selectedIndex)]="selectedTabIndex">
+    <mat-tab label="Grammars">
+      <div class="spacer">&nbsp;</div>
+      <div class="form-group" style="border-radius: 4px; margin: 15px; border: solid 1px rgba(255,255,255,.1);">
+        <mat-selection-list #documentList [multiple]="false">
+          <mat-list-option *ngFor="let document of documents.documents" [value]="document">{{document.grammar.name}}
+          </mat-list-option>
+        </mat-selection-list>
+      </div>
+      <div class="form-group ">
+        <div class="row">
+          <div class="col-sm-3">
+            <button mat-flat-button color="primary" (click)="onNewGrammar()">New Grammar</button>
+          </div>
+          <div class="col-sm-3">
+            <button mat-flat-button color="primary" (click)="onSaveAll()">Save All</button>
+          </div>
+          <div class="col-sm-6">
+            <div ng2FileDrop [ngClass]="{'nv-file-over': hasBaseDropZoneOver}" (fileOver)="fileOverBase($event)"
+              [uploader]="uploader" (onFileDrop)="onFileDrop($event)" class="well my-drop-zone">
+              <button color="primary" class="mat-focus-indicator mat-flat-button mat-button-base mat-primary"
+                (click)="openFileDialog()">
+                <span class="mat-button-wrapper">Upload File or Drop here</span>
+                <span matripple="" class="mat-ripple mat-button-ripple"></span>
+                <span class="mat-button-focus-overlay"></span>
+              </button>
+            </div>
+            <input #btnOpenFile type="file" ng2FileSelect [uploader]="uploader" (onFileSelected)="onFileDrop($event)"
+              multiple style="display:none" />
+          </div>
+        </div>
+        <div class="row">
+        </div>
+      </div>
+
+    </mat-tab>
+    <mat-tab label="Grammar" [disabled]="!grammar">
+      <ng-template mat-tab-label>
+        Grammar {{grammar?.name}}
+      </ng-template>
+
+      <div class="row content" *ngIf="grammar">
+        <div class="col-sm-3">
+          <app-grammar-editor [grammar]="grammar" (modelChanged)="onModelChanged($event)"
+            (copyGrammar)="onCopyGrammar($event)"></app-grammar-editor>
+        </div>
+        <div class="col-sm-9 ">
+          <app-symbol-graph [grammar]="grammar"></app-symbol-graph>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="lsystem">
+      <div class="spacer">&nbsp;</div>
+      <div class=" form-group">
+        <div class="row">
+          <div class="col-sm-3"></div>
+          <div class="col-sm-6 links">
+            <div>
+              The program <i>lsystem</i> was originally developed with Turbo Pascal for Windows in 1994 as a lab project
+              at the Technical University of Vienna.
+            </div>
+            <p></p>
+            <div>
+              This project re-creates the original program in functionality, but of course a lot has changed since then:
+              <ul>
+                <li>modal dialogs are almost a no-no, as computers became fast enough
+                  to re-calculate models based on changing user input in real-time,
+                  allowing for "live editing"
+                  <p></p>
+                </li>
+                <li>pixel manipulation using the Windows
+                  <a href="https://docs.microsoft.com/en-us/windows/win32/gdi/device-contexts" target="_blank">Device
+                    Context</a>
+                  has been superseded by SVG vector graphics embedded in HTML
+                  <p></p>
+                </li>
+                <li>compiled Turbo Pascal machine code is replaced by Typescript and Angular templates converted to
+                  JavaScript
+                  and compiled in real-time by a web browser to create HTML pages as-you-browse
+                  <p></p>
+                </li>
+              </ul>
+            </div>
+            <p></p>
+            <div>
+              Acknowledgements:
+              <div>
+                <ul>
+                  <li><a href="https://angular.io/" target="_blank">Angular 10</a> with
+                    <a href="https://material.angular.io/" target="_blank">Angular Material (10.2)</a>
+                    purple-green theme.
+                    <p></p>
+                  </li>
+                  <li><a href="https://fonts.google.com/specimen/Roboto" target="_blank">Google Roboto font</a>
+                    via <a href="https://google-webfonts-helper.herokuapp.com/fonts/roboto" target="_blank">google
+                      webfonts
+                      helper</a>
+                    and <a href="https://google.github.io/material-design-icons/" target="_blank">Google Material
+                      Icons</a>
+                    <p></p>
+                  </li>
+                  <li><a href="https://www.npmjs.com/package/ngx-color-picker" target="_blank">Angular Color Picker</a>
+                    <p></p>
+                  </li>
+                  <li>Panning and zooming the generated SVG graphics using <a
+                      href="https://www.npmjs.com/package/svg-pan-zoom" target="_blank">svg-pan-zoom</a>.
+                    (<a href="https://github.com/ariutta/svg-pan-zoom" target="_blank">GitHub</a>)
+                    <p></p>
+                  </li>
+                  <li><a href="https://www.npmjs.com/package/ngx-filesaver" target="_blank">ngx-filesaver</a> (<a
+                      href="https://github.com/cipchk/ngx-filesaver" target="_blank">GitHub</a>)
+                    and <a href="https://www.npmjs.com/package/file-saver" target="_blank">file-saver</a> for
+                    downloading
+                    <p></p>
+                  </li>
+                  <li><a href="https://www.npmjs.com/package/ng2-file-upload" target="_blank">ng2-file-upload</a>
+                    (<a href="https://github.com/valor-software/ng2-file-upload" target="_blank">GitHub</a>,
+                    <a href="https://valor-software.com/ng2-file-upload/" target="_blank">Homepage</a>)
+                    for uploading
+                    <p></p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>
